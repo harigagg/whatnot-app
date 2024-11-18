@@ -30,11 +30,8 @@ def handle_event():
             user_state.scam_flags += 1
             check_scam_flags(user_state, user_id)
             if user_state.scam_flags >= 2:
-                log.info(f"User:{user_id} restricted from messaging due to scam flags exceeding threshold.")
-                # Mark user as restricted from messaging
-                user_state.can_message = False
-                # Track the restriction
-                update_tripwire_count("message_restriction", user_id)
+                log.info(f"User:{
+                         user_id} restricted from messaging due to scam flags exceeding threshold.")
 
         elif event_name == "add_credit_card":
             zip_code = data["event_properties"]["zip_code"]
@@ -43,9 +40,6 @@ def handle_event():
             add_credit_card(user_id, zip_code, total_spend, last_four_digits)
             check_credit_card_zip(user_id)
             log.debug("user_state.can_purchase", user_state.can_purchase)
-            if user_state.can_purchase is False:
-                # Track restriction for purchase
-                update_tripwire_count("purchase_restriction", user_id)
 
         elif event_name == "chargeback":
             user_data = UserState.query.filter_by(user_id=str(user_id)).all()
