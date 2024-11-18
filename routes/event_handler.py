@@ -41,7 +41,6 @@ def handle_event():
             last_four_digits = data["event_properties"]["last_four_digits"]
             total_spend = data["event_properties"]["total_spend"]
             add_credit_card(user_id, zip_code, total_spend, last_four_digits)
-            log.info(f"User:{user_id} added a credit card with zip code:{zip_code} and last four digits:{last_four_digits}.")
             check_credit_card_zip(user_id)
             log.debug("user_state.can_purchase", user_state.can_purchase)
             if user_state.can_purchase is False:

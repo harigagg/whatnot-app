@@ -46,6 +46,8 @@ def add_credit_card(user_id, zip_code, total_spend, last_four_digits):
                           total_spend=total_spend,
                           last_four_digits=last_four_digits)
     db.session.add(new_card)
+    log.info(f"User:{user_id} added a credit card with zip code:{
+             zip_code} and last four digits:{last_four_digits}.")
     return new_card
 
 def check_valid_chargeback(user_id, total_chargeback_amount):
