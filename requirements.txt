@@ -1,0 +1,8 @@
+Flask==2.3.2
+Flask-SQLAlchemy==3.0.3
+Flask-Redis==0.4.0
+redis==4.5.5
+SQLAlchemy==2.0.16
+psycopg2-binary==2.9.6
+Flask-Cors==4.0.0
+gunicorn==21.0.1
