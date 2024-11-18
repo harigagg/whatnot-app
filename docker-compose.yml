@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   flask_app:
+    replicas: 6
     build:
       context: .
       dockerfile: Dockerfile
@@ -15,12 +16,14 @@ services:
       - db
 
   redis:
+    replicas: 3
     image: redis:7.0
     container_name: redis_container
     ports:
       - "6379:6379"
 
   db:
+    replicas: 3
     image: postgres:15
     container_name: postgres_container
     environment:

@@ -7,7 +7,7 @@ A simple service to manage user access based on event-driven rules.
 
 ```text
 
-user_access_service/
+whatnot-app/
 ├── app.py                  # Main entry point of the application
 ├── config.py               # Configuration settings
 ├── models/
@@ -47,29 +47,58 @@ user_access_service/
 ## Setup and Installation
 
 1. Clone the Repository
-```
-git clone git@github.com:harigagg/whatnot-app.git
-cd <repository-folder>
-```
 
-1. Build and start the services:
+    ```bash
+    git clone git@github.com:harigagg/whatnot-app.git
+    cd whatnot-app
+    ```
+
+2. Build and start the services:
 
    ```bash
    docker-compose up --build
    ```
 
-2. Access `user_access_service` at [http://localhost:5000](http://localhost:5000).
+2. The application will be accessible at: [http://localhost:5005](http://localhost:5005).
 
-3. Modify `event_sender/send_events.py` to customize event data as needed.
+## Configuration
 
-    - This is for testing purposes only and to demonstrates and example of an external service sending events.  Feel free to modify in any way you choose.
+The application uses environment variables for configuration. Key settings include:
 
-4. Implement your code in `app.py`
-    - Note: `app.py` is just the entrypoint.  Feel free to break of the code into multiple files as you see fit.
+#### PostgreSQL:
+```
+POSTGRES_USER: Database username.
+POSTGRES_PASSWORD: Database password.
+POSTGRES_DB: Database name.
+```
+
+#### Redis:
+```
+REDIS_HOST: Hostname for Redis (default: redis).
+REDIS_PORT: Port for Redis (default: 6379).
+```
+
+## Running Tests
+To run tests it can be done outside and inside the docker container(I prefer to execute the test commands inside the application container as it will not disturb my local setup):
+
+Note: Run the docker-compose command before running the below commands
+
+1. Access the Flask app container:
+    ```bash
+    docker exec -it flask_app_container bash
+    ```
+2. Run tests:
+
+    ```bash
+    pytest
+    ```
+3. Run Locust: (For stress testing)
+    ```bash
+    locust -f locustfile.py
+    ```
 
 ## Endpoints
 
 - `**POST /event**:` Receives events.
 - `**GET /canmessage**`: Checks if the user can send messages.
 - `**GET /canpurchase**`: Checks if the user can make purchases.
-
