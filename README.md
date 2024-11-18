@@ -59,7 +59,7 @@ whatnot-app/
    docker-compose up --build
    ```
 
-2. The application will be accessible at: [http://localhost:5005](http://localhost:5005).
+3. The application will be accessible at: [http://localhost:5005](http://localhost:5005).
 
 ## Configuration
 
